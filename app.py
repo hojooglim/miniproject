@@ -13,13 +13,17 @@ app = Flask(__name__)
 def home():
    return render_template('index.html')
 
-@app.route('/in-1')
-def introduce_1():
-   return render_template('in-1.html')
+@app.route('/member-1')
+def member_1():
+   return render_template('member-1.html')
 
-@app.route('/book')
+@app.route('/member-2')
+def member_2():
+   return render_template('member-2.html')
+
+@app.route('/comment')
 def commentbook():
-   return render_template('book.html')
+   return render_template('comment.html')
 
 
 @app.route("/guestbook", methods=["POST"])
