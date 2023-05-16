@@ -21,6 +21,10 @@ def member_1():
 def member_2():
    return render_template('member-2.html')
 
+@app.route('/member-3')
+def member_3():
+   return render_template('member-3.html')
+
 @app.route('/comment')
 def commentbook():
    return render_template('comment.html')
