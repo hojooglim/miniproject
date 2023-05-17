@@ -36,6 +36,42 @@
 				window.location.reload();
 			});
 		}
+
+		$(document).ready(function () {
+        show_member();
+      });
+	  
+      function show_member() {
+        fetch('/member').then(res => res.json()).then(data => {
+          
+               let rows = data['result']
+                $('#tiles').empty()
+               rows.forEach ((a) =>{
+
+                let id = a['id']
+				let name = a['name']
+				let img = a['img']
+             
+                let temp_html = `
+									<article class="style1">
+										<span class="image">
+											<img src="${img}" alt="" />
+										</span>
+										<a href="member-${id}">
+											<h2>${name}</h2>
+											<div class="content">
+												<p></p>
+											</div>
+										</a>
+									</article>
+								`
+                $('#tiles').append(temp_html)
+                })			
+            })
+      }
+      
+      
+		
 	</script>
 
 </head>
@@ -49,7 +85,7 @@
 			<div class="inner">
 
 				<!-- Logo -->
-				<a href="/main" class="logo">
+				<a href="main" class="logo">
 					<span class="symbol"><img src="static/images/logo.png" alt="" /></span><span class="title">Code
 						Pilot</span>
 				</a>
@@ -63,18 +99,14 @@
 
 			</div>
 		</header>
-
+		
 		<!-- Menu -->
 		<nav id="menu">
 			<h2>Member</h2>
 			<ul>
-				<li><a href="/main">Home</a></li>
-				<li><a href="member-1">임호중</a></li>
-				<li><a href="member-2">최혜원</a></li>
-				<li><a href="member-3">양소영</a></li>
-				<li><a href="member-4">추지혜</a></li>
-				<li><a href="generic.html">안정모</a></li>
-				<li><a href="comment">방명록</a></li>
+				{% for member in members %}
+				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
+				{% endfor %}
 			</ul>
 		</nav>
 
@@ -86,61 +118,18 @@
 						코드 비행사 멤버들을 소개합니다</h1>
 					<p>목적지를 향해 고난과 역경을 이겨내고 팀원들과 힘을 합쳐 비행 하는 중입니다.</p>
 				</header>
-				<section class="tiles">
+				<section id ="tiles" class="tiles">
 					<article class="style1">
 						<span class="image">
 							<img src="static/images/lim.jpg" alt="" />
 						</span>
-						<a href="main?id=lim">
+						<a href="member-1">
 							<h2>임호중</h2>
 							<div class="content">
 								<p>소개합니다</p>
 							</div>
 						</a>
 					</article>
-					<article class="style2">
-						<span class="image">
-							<img src="static/images/IMG_2272.JPG" alt="" />
-						</span>
-						<a href="member-2">
-							<h2>최혜원</h2>
-							<div class="content">
-								<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-							</div>
-						</a>
-					</article>
-					<article class="style3">
-						<span class="image">
-							<img src="static/images/pic_y.jpg" alt="" />
-						</span>
-						<a href="member-3">
-							<h2>양소영</h2>
-							<div class="content">
-								<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-							</div>
-						</a>
-					</article>
-					<article class="style4">
-						<span class="image">
-							<img src="static/images/index_jihye.jpg" alt="" />
-						</span>
-						<a href="member-4">
-							<h2>추지혜</h2>
-							<div class="content">
-								<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-							</div>
-						</a>
-					</article>
-					<article class="style5">
-						<span class="image">
-							<img src="static/images/pic05.jpg" alt="" />
-						</span>
-						<a href="generic.html">
-							<h2>안정민</h2>
-							<div class="content">
-								<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-							</div>
-						</a>
 				</section>
 			</div>
 		</div>

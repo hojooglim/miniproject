@@ -9,12 +9,42 @@ db = client.dbsparta
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
+
+members = [
+   {'id': 1, 'name':'임호중', 'img':'static/images/lim.JPG'},
+   {'id': 2, 'name':'최혜원', 'img':'static/images/lim.JPG'},
+   {'id': 3, 'name':'양소영', 'img':'static/images/lim.JPG'},
+   {'id': 4, 'name':'추지혜', 'img':'static/images/lim.JPG'},
+   {'id': 5, 'name':'안정민', 'img':'static/images/lim.JPG'},
+]
+
+
+for a in members :
+    id = a['id']
+    name = a['name']
+    img = a['img']
+
+    doc = {
+        'id' : id,
+        'name'  : name,
+        'img' : img
+    }
+    db.members.insert_one(doc)
+
+@app.route("/member", methods=["GET"])
+def members_get():
+
+    all_members = list(db.members.find({},{'_id':False}))
+
+    return jsonify({'result': all_members})
+
+
 @app.route('/main')
 def home():
-   return render_template('index.html')
+   return render_template('index.html',members=members)
 
 @app.route('/member-1')
-def member_1():
+def member():
    return render_template('member-1.html')
 
 @app.route('/member-2')
