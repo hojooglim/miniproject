@@ -40,15 +40,13 @@ def members_get():
 
 
 
-
-
 @app.route('/main')
 def home():
    return render_template('index.html',members=members)
 
 @app.route('/comment')
 def commentbook():
-   return render_template('comment.html')
+   return render_template('comment.html',members=members)
 
 @app.route('/member-1')
 def member():
@@ -68,7 +66,7 @@ def member_4():
 
 @app.route('/member-5')
 def member5():
-   return render_template('member.html')
+   return render_template('member-5.html')
 
 
 
@@ -84,6 +82,7 @@ def guestbook_post():
     db.book.insert_one(doc)
 
     return jsonify({'msg': 'POST 연결 완료!'})
+
 
 @app.route("/guestbook", methods=["GET"])
 def guestbook_get():
