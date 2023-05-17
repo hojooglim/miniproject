@@ -53,7 +53,7 @@
 				let img = a['img']
              
                 let temp_html = `
-									<article class="style1">
+									<article class="style${id}">
 										<span class="image">
 											<img src="${img}" alt="" />
 										</span>
@@ -104,9 +104,11 @@
 		<nav id="menu">
 			<h2>Member</h2>
 			<ul>
+				<li><a href="main">Home</a></li>
 				{% for member in members %}
 				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
 				{% endfor %}
+				<li><a href="comment">방명록</a></li>
 			</ul>
 		</nav>
 
@@ -114,7 +116,7 @@
 		<div id="main">
 			<div class="inner">
 				<header>
-					<h1>WE ARE CODE PILOTS<br />
+					<h1>WE ARE CODE PILOTS!<br />
 						코드 비행사 멤버들을 소개합니다</h1>
 					<p>목적지를 향해 고난과 역경을 이겨내고 팀원들과 힘을 합쳐 비행 하는 중입니다.</p>
 				</header>

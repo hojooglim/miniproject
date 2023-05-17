@@ -29,7 +29,7 @@ for a in members :
         'name'  : name,
         'img' : img
     }
-    db.members.insert_one(doc)
+    
 
 @app.route("/member", methods=["GET"])
 def members_get():
@@ -39,9 +39,16 @@ def members_get():
     return jsonify({'result': all_members})
 
 
+
+
+
 @app.route('/main')
 def home():
    return render_template('index.html',members=members)
+
+@app.route('/comment')
+def commentbook():
+   return render_template('comment.html')
 
 @app.route('/member-1')
 def member():
@@ -59,9 +66,10 @@ def member_3():
 def member_4():
    return render_template('member-4.html')
 
-@app.route('/comment')
-def commentbook():
-   return render_template('comment.html')
+@app.route('/member-5')
+def member5():
+   return render_template('member.html')
+
 
 
 @app.route("/guestbook", methods=["POST"])
