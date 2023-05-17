@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/ijiae/Downloads/html5up-phantom (1)/venv/bin/python3" "$0" "$@"
+'''exec' "/Users/choihyewon/Desktop/개발/백엔드 스프링/miniproject/venv/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

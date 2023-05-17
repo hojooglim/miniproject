@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/ijiae/Downloads/html5up-phantom (1)/venv"
+VIRTUAL_ENV="/Users/choihyewon/Desktop/개발/백엔드 스프링/miniproject/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
