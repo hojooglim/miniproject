@@ -9,7 +9,7 @@ db = client.dbsparta
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/main')
 def home():
    return render_template('index.html')
 
@@ -24,6 +24,10 @@ def member_2():
 @app.route('/member-3')
 def member_3():
    return render_template('member-3.html')
+
+@app.route('/member-4')
+def member_4():
+   return render_template('member-4.html')
 
 @app.route('/comment')
 def commentbook():
