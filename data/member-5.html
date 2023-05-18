@@ -110,10 +110,9 @@
 			<h2>Member</h2>
 			<ul>
 				<li><a href="main">Home</a></li>
-				<li><a href="member-1">임호중</a></li>
-				<li><a href="member-2">최혜원</a></li>
-				<li><a href="member-3">양소영</a></li>
-				<li><a href="member-4">추지혜</a></li>
+				{% for member in members %}
+				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
+				{% endfor %}
 				<li><a href="comment">방명록</a></li>
 			</ul>
 		</nav>

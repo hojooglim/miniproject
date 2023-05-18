@@ -42,7 +42,7 @@
       });
 	  
       function show_member() {
-        fetch('/member').then(res => res.json()).then(data => {
+        fetch('/members').then(res => res.json()).then(data => {
           
                let rows = data['result']
                 $('#tiles').empty()
@@ -50,14 +50,14 @@
 
                 let id = a['id']
 				let name = a['name']
-				let img = a['img']
+				let img = a['img_index']
              
                 let temp_html = `
 									<article class="style${id}">
 										<span class="image">
 											<img src="${img}" alt="" />
 										</span>
-										<a href="member-${id}">
+										<a href="main/member/${id}">
 											<h2>${name}</h2>
 											<div class="content">
 												<p></p>
@@ -106,7 +106,7 @@
 			<ul>
 				<li><a href="main">Home</a></li>
 				{% for member in members %}
-				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
+				<li><a href="main/member/{{member.id}}">{{member.name}}</a></li>
 				{% endfor %}
 				<li><a href="comment">방명록</a></li>
 			</ul>
@@ -120,6 +120,7 @@
 						코드 비행사 멤버들을 소개합니다</h1>
 					<p>목적지를 향해 고난과 역경을 이겨내고 팀원들과 힘을 합쳐 비행 하는 중입니다.</p>
 				</header>
+				<form action = "http://localhost:5002/main" method="get"></form>
 				<section id ="tiles" class="tiles">
 					<article class="style1">
 						<span class="image">
@@ -133,6 +134,7 @@
 						</a>
 					</article>
 				</section>
+				</form>
 			</div>
 		</div>
 
@@ -142,13 +144,13 @@
 				<section>
 					<h2>보내실 말씀</h2>
 					<div class="mypost">
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="name" />
+						<div class="form-floating" style="margin-bottom: 3em">
 							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
 						</div>
-						<div class="form-floating">
-							<input type="text" class="form-control" id="comment" />
+						<div class="form-floating" style="margin-bottom: 2em">
 							<label for="floatingTextarea2">응원댓글</label>
+							<input type="text" class="form-control" id="comment" />
 						</div>
 						<button onclick="save_comment()" type="button" class="btn btn-dark">
 							방명록 남기기
@@ -162,14 +164,13 @@
 			</div>
 		</footer>
 	</div>
-
+	​
 	<!-- Scripts -->
 	<script src="static/js/jquery.min.js"></script>
 	<script src="static/js/browser.min.js"></script>
 	<script src="static/js/breakpoints.min.js"></script>
 	<script src="static/js/util.js"></script>
 	<script src="static/js/main.js"></script>
-
 </body>
 
 </html>

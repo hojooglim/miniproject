@@ -89,7 +89,7 @@
 			<ul>
 				<li><a href="main">Home</a></li>
 				{% for member in members %}
-				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
+				<li><a href="main/member/{{member.id}}">{{member.name}}</a></li>
 				{% endfor %}
 				<li><a href="comment">방명록</a></li>
 			</ul>
@@ -131,13 +131,13 @@
 				<section>
 					<h2>보내실 말씀</h2>
 					<div class="mypost">
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="name" />
+						<div class="form-floating" style="margin-bottom: 3em">
 							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
 						</div>
-						<div class="form-floating">
-							<input type="text" class="form-control" id="comment" />
+						<div class="form-floating" style="margin-bottom: 2em">
 							<label for="floatingTextarea2">응원댓글</label>
+							<input type="text" class="form-control" id="comment" />
 						</div>
 						<button onclick="save_comment()" type="button" class="btn btn-dark">
 							방명록 남기기
@@ -150,16 +150,14 @@
 				</ul>
 			</div>
 		</footer>
-
 	</div>
-
+	​
 	<!-- Scripts -->
 	<script src="static/js/jquery.min.js"></script>
 	<script src="static/js/browser.min.js"></script>
 	<script src="static/js/breakpoints.min.js"></script>
 	<script src="static/js/util.js"></script>
 	<script src="static/js/main.js"></script>
-
 </body>
 
 </html>

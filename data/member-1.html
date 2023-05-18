@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>임호중 - 코딩비행사</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+	<link rel="stylesheet" href="static/css/bootstrap.css" />
+	<link rel="stylesheet" href="static/css/main.css" />
+	<link rel="shortcut icon" href="static/images/favicon.png" />
+	​
+	<script>
+		function save_comment() {
+			let formData = new FormData();
+
+			let name = $("#name").val();
+			let comment = $("#comment").val();
+
+			formData.append("name_give", name);
+			formData.append("comment_give", comment);
+
+			fetch("/guestbook", { method: "POST", body: formData })
+				.then((res) => res.json())
+				.then((data) => {
+					alert(data["msg"]);
+					window.location.reload();
+				});
+		}
+	</script>
+
+	<style>
+		.top {
+			max-width: 100%;
+			margin: auto;
+			justify-content: center;
+			display: flex;
+		}
+
+		.top_img {
+			max-width: 30%;
+			height: auto;
+		}
+
+		.content-section-heading {
+			text-align: center;
+		}
+
+		h4 {
+			text-align: center;
+		}
+
+		.panel-body {
+			width: auto;
+		}
+
+		.profile {
+			width: 250px;
+			height: 250px;
+			margin-bottom: 20px;
+		}
+
+		p {
+			margin: 0 0 1em 0;
+		}
+
+		.iframebox {
+			position: relative;
+			width: 100%;
+		}
+
+		iframe {
+			width: 100%;
+			height: 800px;
+		}
+	</style>
+	<noscript>
+		<link rel="stylesheet" href="static/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<!-- Logo -->
+				<a href="main" class="logo">
+					<span class="symbol"><img src="static/images/logo.png" alt="" /></span><span class="title">Code
+						Pilot</span>
+				</a>
+				​
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		​
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Member</h2>
+			<ul>
+				<li><a href="main">Home</a></li>
+				{% for member in members %}
+				<li><a href="/member-{{member.id}}">{{member.name}}</a></li>
+				{% endfor %}
+				<li><a href="comment">방명록</a></li>
+			</ul>
+		</nav>
+		​
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>임호중</h1>
+
+				<div class="container top row">
+					<img class="top_img" src="static/images/hojooglim01.jpg" />
+					<img class="top_img" src="static/images/hojooglim02.jpg" />
+					<img class="top_img" src="static/images/hojooglim03.jpg" />
+				</div>
+				<hr />
+				<br />
+				<div class="panel panel-primary">
+					<!-- body -->
+					<div class="panel-body">
+						<!-- 내 기본 정보 -->
+						<div class="container">
+							<div class="content-section-heading">
+								<h3 class="text-secondary">대단히반갑습니다. 상당히고맙습니다.</h3>
+								<h2>임호중 설명서</h2>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-sm-6 mt-5 mb-5 mb-lg-0">
+									<img class="profile" src="static/images/jihye3d01.jpg" />
+									<h4>
+										<strong>내정보</strong>
+									</h4>
+									<hr />
+									<ul class="list-group">
+										<li class="list-group-item">이름 : 임호중</li>
+										<li class="list-group-item">성별 : 남</li>
+										<li class="list-group-item">생년월일 : 1991.04.08</li>
+										<li class="list-group-item">포지션 : 팀장</li>
+									</ul>
+								</div>
+								<div class="col-lg-3 col-md-6 mt-5 mb-5 mb-lg-0">
+									<img class="profile" src="static/images/jihye3d02.jpg" />
+									<h4>
+										<strong>좋아하는 것들</strong>
+									</h4>
+									<hr />
+									<ul class="list-group">
+										<li class="list-group-item">테니스</li>
+										<li class="list-group-item">조깅</li>
+										<li class="list-group-item">Arsenal FC</li>
+										<li class="list-group-item">여행</li>
+									</ul>
+								</div>
+								<div class="col-lg-3 col-md-6 mt-5 mb-5 mb-md-0">
+									<img class="profile" src="static/images/jihye3d03.jpg" />
+									<h4>
+										<strong>싫어하는 것들</strong>
+									</h4>
+									<hr />
+									<ul class="list-group">
+										<li class="list-group-item">추위</li>
+										<li class="list-group-item">더위 많이 타는 사람</li>
+									</ul>
+								</div>
+								<div class="col-lg-3 mt-5 col-md-6">
+									<img class="profile" src="static/images/jihye3d04.jpg" />
+									<h4>
+										<strong>TMI</strong>
+									</h4>
+									<hr />
+									<ul class="list-group">
+										<li class="list-group-item">MBTI: ISTJ</li>
+										<li class="list-group-item">1년 내내 전기장판 틀기</li>
+										<li class="list-group-item">기혼</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<br />
+						<!-- 좋아하는 노래 : iframe -->
+						<div class="content-section-heading">
+							<h3 class="text-secondary">
+								우리 힘내기로해요 <br />
+								
+							</h3>
+							<h2>부석순 - 화이팅해야지</h2>
+						</div>
+						<div class="iframebox">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/mBXBOLG06Wc"
+								title="YouTube video player" frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		​
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>보내실 말씀</h2>
+					<div class="mypost">
+						<div class="form-floating" style="margin-bottom: 3em">
+							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
+						</div>
+						<div class="form-floating" style="margin-bottom: 2em">
+							<label for="floatingTextarea2">응원댓글</label>
+							<input type="text" class="form-control" id="comment" />
+						</div>
+						<button onclick="save_comment()" type="button" class="btn btn-dark">
+							방명록 남기기
+						</button>
+					</div>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+	​
+	<!-- Scripts -->
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/browser.min.js"></script>
+	<script src="static/js/breakpoints.min.js"></script>
+	<script src="static/js/util.js"></script>
+	<script src="static/js/main.js"></script>
+</body>
+
+</html>
