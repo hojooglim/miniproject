@@ -18,7 +18,6 @@ def member_delete():
 
 @app.route("/update", methods=["POST"])
 def update_post():
-      id_receive = request.form['id_give']
       name_receive = request.form['name_give']
       img_index_receive = request.form['img_index_give']
       img_1_receive = request.form['img_1_give']
@@ -45,35 +44,32 @@ def update_post():
       music_receive = request.form['music_give']
       music_url_receive = request.form['music_url_give']
    
-      doc = {
-        'id' : id_receive,
-        'name'  : name_receive,
-        'img_index' : img_index_receive,
-        'img_1' : img_1_receive, 
-        'img_2' : img_2_receive,
-        'img_3' : img_3_receive, 
-        'man' : man_receive, 
-        'birth' : birth_receive, 
-        'position' : position_receive,
-        'fav_1' : fav_1_receive ,
-        'fav_2' : fav_2_receive ,
-        'fav_3' : fav_3_receive ,
-        'fav_4' : fav_4_receive ,
-        'fav_5' : fav_5_receive ,
-        'nav_1' : nav_1_receive ,
-        'nav_2' : nav_2_receive ,
-        'nav_3' : nav_3_receive ,
-        'nav_4' : nav_4_receive ,
-        'nav_5' : nav_5_receive ,
-        'tmi_1' : tmi_1_receive ,
-        'tmi_2' : tmi_2_receive ,
-        'tmi_3' : tmi_3_receive ,
-        'tmi_4' : tmi_4_receive ,
-        'tmi_5' : tmi_5_receive ,
-        'music' : music_receive ,
-        'music_url' : music_url_receive
-      }
-      db.members.insert_one(doc)
+      db.users.update_one({'name':name_receive},{'$set':{'name':name_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'img_index':img_index_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'img_1':img_1_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'img_2':img_2_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'img_3':img_3_receive}})
+      db.members.update_one({'name':name_receive},{'$set':{'man':man_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'birth':birth_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'position':position_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'fav_1':fav_1_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'fav_2':fav_2_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'fav_3':fav_3_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'fav_4':fav_4_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'fav_5':fav_5_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'nav_1':nav_1_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'nav_2':nav_2_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'nav_3':nav_3_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'nav_4':nav_4_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'nav_5':nav_5_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'tmi_1':tmi_1_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'tmi_2':tmi_2_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'tmi_3':tmi_3_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'tmi_4':tmi_4_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'tmi_5':tmi_5_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'music':music_receive}})
+      db.users.update_one({'name':name_receive},{'$set':{'music_url':music_url_receive}})
+
       return jsonify({'msg': '수정 되었습니다'})
 
 @app.route('/main/member/update/<id>')
