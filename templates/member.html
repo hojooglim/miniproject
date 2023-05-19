@@ -16,18 +16,17 @@
 		function save_comment() {
 			let formData = new FormData();
 
-			let name = $("#name").val();
-			let comment = $("#comment").val();
+			let name = $('#name').val()
+			let comment = $('#comment').val()
 
 			formData.append("name_give", name);
 			formData.append("comment_give", comment);
 
-			fetch("/guestbook", { method: "POST", body: formData })
-				.then((res) => res.json())
-				.then((data) => {
-					alert(data["msg"]);
-					window.location.reload();
-				});
+			fetch('/guestbook', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+
+				window.location.reload();
+				onload(location.href = "/comment")
+			});
 		}
 
 	</script>
@@ -217,35 +216,32 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	​
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<section>
-				<h2 style= "margin-left: 20px">보내실 말씀</h2>
-				<div class="mypost">
-					<div class="form-floating" style= "margin-left: 20px" style="margin-bottom: 3em">
-						<label for="floatingInput">이름</label>
-						<input style= "margin-bottom: 20px" type="text" class="form-control" id="name" />
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>보내실 말씀</h2>
+					<div class="mypost">
+						<div class="form-floating" style="margin-bottom: 3em">
+							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
+						</div>
+						<div class="form-floating" style="margin-bottom: 2em">
+							<label for="floatingTextarea2">응원댓글</label>
+							<input type="text" class="form-control" id="comment" />
+						</div>
+						<button onclick="save_comment()" type="button">
+							방명록 남기기
+						</button>
 					</div>
-					<div class="form-floating" style= "margin-left: 20px" style="margin-bottom: 2em">
-						<label for="floatingTextarea2">응원댓글</label>
-						<input style= "margin-bottom: 20px" type="text" class="form-control" id="comment" />
-					</div>
-					<button style= "margin-left: 20px" onclick="save_comment()" type="button" class="btn btn-dark">
-						방명록 남기기
-					</button>
-				</div>
-			</section>
-			<ul class="copyright">
-				<li>&copy; Untitled. All rights reserved</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
 	</div>
-
 	<!-- Scripts -->
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>

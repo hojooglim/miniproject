@@ -11,6 +11,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="static/css/main.css" />
+	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
 	<noscript>
 		<link rel="stylesheet" href="static/css/noscript.css" />
 	</noscript>
@@ -32,27 +33,27 @@
 
 			fetch('/guestbook', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
 
-				alert(data["msg"]);
 				window.location.reload();
+				onload(location.href = "comment")
 			});
 		}
 
 		$(document).ready(function () {
-        show_member();
-      });
-	  
-      function show_member() {
-        fetch('/members').then(res => res.json()).then(data => {
-          
-               let rows = data['result']
-                $('#tiles').empty()
-               rows.forEach ((a) =>{
+			show_member();
+		});
 
-                let id = a['id']
-				let name = a['name']
-				let img = a['img_index']
-             
-                let temp_html = `
+		function show_member() {
+			fetch('/members').then(res => res.json()).then(data => {
+
+				let rows = data['result']
+				$('#tiles').empty()
+				rows.forEach((a) => {
+
+					let id = a['id']
+					let name = a['name']
+					let img = a['img_index']
+
+					let temp_html = `
 									<article class="style${id}">
 										<span class="image">
 											<img src="${img}" alt="" />
@@ -65,13 +66,13 @@
 										</a>
 									</article>
 								`
-                $('#tiles').append(temp_html)
-                })			
-            })
-      }
-      
-      
-		
+					$('#tiles').append(temp_html)
+				})
+			})
+		}
+
+
+
 	</script>
 
 </head>
@@ -99,16 +100,16 @@
 
 			</div>
 		</header>
-		
+
 		<!-- Menu -->
 		<nav id="menu">
 			<h2>Member</h2>
 			<ul>
-				<li><a href="main">Home</a></li>
+				<li><a href="/main">Home</a></li>
 				{% for member in members %}
-				<li><a href="main/member/{{member.id}}">{{member.name}}</a></li>
+				<li><a href="/main/member/{{member.id}}">{{member.name}}</a></li>
 				{% endfor %}
-				<li><a href="comment">방명록</a></li>
+				<li><a href="/comment">방명록</a></li>
 			</ul>
 		</nav>
 
@@ -120,8 +121,8 @@
 						코드 비행사 멤버들을 소개합니다</h1>
 					<p>목적지를 향해 고난과 역경을 이겨내고 팀원들과 힘을 합쳐 비행 하는 중입니다.</p>
 				</header>
-				<form action = "http://localhost:5002/main" method="get"></form>
-				<section id ="tiles" class="tiles">
+				<form action="http://localhost:5002/main" method="get"></form>
+				<section id="tiles" class="tiles">
 					<article class="style1">
 						<span class="image">
 							<img src="static/images/lim.jpg" alt="" />
@@ -152,7 +153,7 @@
 							<label for="floatingTextarea2">응원댓글</label>
 							<input type="text" class="form-control" id="comment" />
 						</div>
-						<button onclick="save_comment()" type="button" class="btn btn-dark">
+						<button onclick="save_comment()" type="button">
 							방명록 남기기
 						</button>
 					</div>
