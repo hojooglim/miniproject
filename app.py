@@ -11,27 +11,28 @@ app = Flask(__name__)
 
 @app.route('/main')
 def home():
-   return render_template('index.html')
-
-@app.route('/member-1')
-def member_1():
-   return render_template('member-1.html')
-
-@app.route('/member-2')
-def member_2():
-   return render_template('member-2.html')
-
-@app.route('/member-3')
-def member_3():
-   return render_template('member-3.html')
-
-@app.route('/member-4')
-def member_4():
-   return render_template('member-4.html')
+   members = list(db.members.find({},{'_id':False}))
+   return render_template('index.html',members=members)
 
 @app.route('/comment')
 def commentbook():
-   return render_template('comment.html')
+   members = list(db.members.find({},{'_id':False}))
+   return render_template('comment.html',members=members)
+
+@app.route('/main/member/<id>')
+def member(id):
+      
+      member = list(db.members.find({},{'_id':False}))
+
+      user = db.members.find_one({'id':int(id)})
+      music_url = user['music_url']
+      
+      return render_template('member.html', members=member, user=user, music_url=music_url)
+
+@app.route("/members", methods=["GET"])
+def members_get():
+    all_members = list(db.members.find({},{'_id':False}))
+    return jsonify({'result': all_members})
 
 
 @app.route("/guestbook", methods=["POST"])
@@ -42,17 +43,25 @@ def guestbook_post():
        'name' : name_receive,
        'comment' : comment_receive
     }
-    
     db.book.insert_one(doc)
-
     return jsonify({'msg': 'POST 연결 완료!'})
+
 
 @app.route("/guestbook", methods=["GET"])
 def guestbook_get():
-
     all_book = list(db.book.find({},{'_id':False}))
-
     return jsonify({'result': all_book})
 
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=5001, debug=True)
+   app.run('0.0.0.0', port=5000, debug=True)
+
+
+
+
+
+
+
+
+@app.route('/member-1')
+def member_1():
+   return render_template('member-1.html')

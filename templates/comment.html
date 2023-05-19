@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Elements - Phantom by HTML5 UP</title>
+	<title>방명록 - 코딩비행사</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="static/css/main.css" />
@@ -34,7 +34,6 @@
 
 			fetch('/guestbook', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
 
-				alert(data["msg"]);
 				window.location.reload();
 			});
 		}
@@ -68,7 +67,7 @@
 			<div class="inner">
 
 				<!-- Logo -->
-				<a href="/main" class="logo">
+				<a href="main" class="logo">
 					<span class="symbol"><img src="static/images/logo.png" alt="" /></span><span class="title">Code
 						Pilot</span>
 				</a>
@@ -87,12 +86,10 @@
 		<nav id="menu">
 			<h2>Member</h2>
 			<ul>
-				<li><a href="/main">Home</a></li>
-				<li><a href="member-1">임호중</a></li>
-				<li><a href="member-2">최혜원</a></li>
-				<li><a href="member-3">양소영</a></li>
-				<li><a href="member-4">추지혜</a></li>
-				<li><a href="generic.html">안정모</a></li>
+				<li><a href="main">Home</a></li>
+				{% for member in members %}
+				<li><a href="main/member/{{member.id}}">{{member.name}}</a></li>
+				{% endfor %}
 				<li><a href="comment">방명록</a></li>
 			</ul>
 		</nav>
@@ -133,15 +130,15 @@
 				<section>
 					<h2>보내실 말씀</h2>
 					<div class="mypost">
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="name" />
+						<div class="form-floating" style="margin-bottom: 3em">
 							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
 						</div>
-						<div class="form-floating">
-							<input type="text" class="form-control" id="comment" />
+						<div class="form-floating" style="margin-bottom: 2em">
 							<label for="floatingTextarea2">응원댓글</label>
+							<input type="text" class="form-control" id="comment" />
 						</div>
-						<button onclick="save_comment()" type="button" class="btn btn-dark">
+						<button onclick="save_comment()" type="button">
 							방명록 남기기
 						</button>
 					</div>
@@ -152,16 +149,14 @@
 				</ul>
 			</div>
 		</footer>
-
 	</div>
-
+	​
 	<!-- Scripts -->
 	<script src="static/js/jquery.min.js"></script>
 	<script src="static/js/browser.min.js"></script>
 	<script src="static/js/breakpoints.min.js"></script>
 	<script src="static/js/util.js"></script>
 	<script src="static/js/main.js"></script>
-
 </body>
 
 </html>
