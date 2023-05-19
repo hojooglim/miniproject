@@ -9,16 +9,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
 	<script>
+
 		function save_comment() {
 			let formData = new FormData();
 
 			let name = $("#name").val();
 			let comment = $("#comment").val();
-
+			
 			formData.append("name_give", name);
 			formData.append("comment_give", comment);
 
@@ -27,12 +27,42 @@
 				.then((data) => {
 					alert(data["msg"]);
 					window.location.reload();
+					onload(location.href="/comment");
 				});
+		}
+
+	
+		function delete_member(){
+			let formData = new FormData();
+
+			let member_name = $("#member_name").val()
+
+			console.log(member_name)	
+			formData.append("name_give", member_name)
+
+			fetch("/delete", { method: "POST", body: formData })
+				.then((res) => res.json())
+				.then((data) => {
+					alert(data["msg"]);
+					window.location.reload();
+					onload(location.href="/main");
+			});
 		}
 
 	</script>
 
 	<style>
+		.vertical-center {
+			margin-top: 50px;
+			display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+		}
+		.vertical-center>button {
+			margin-left: 30px;
+		}
+
 		.top {
 			max-width: 100%;
 			margin: auto;
@@ -120,7 +150,7 @@
 		<div id="main">
 			<div class="inner">
 				<h1>{{user['name']}}</h1>
-
+				
 				<div class="container top row" id="memberImg">
 					<img class="top_img" src="/static/{{user['img_1']}}" />
 					<img class="top_img" src="/static/{{user['img_2']}}" />
@@ -211,39 +241,51 @@
 							<h2>{{user['music']}}</h2>
 						</div>
 						<div id="music_load" class="iframebox">
-							{{ music_url|safe }}
+							{{ user['music_url']|safe }}
 						</div>
 					</div>
 				</div>
+				
+				<div class="mypost">
+					
+						<button style="margin-top: 30px;"><a href="/main/member/update/{{user['id']}}">수정하기</a></button>
+					
+								<div class="form-floating" style="margin-top: 30px;">
+									<input type="text"  placeholder="삭제하려면 이름을 입력하세요." style="font-size: 15px;" class="form-control" id="member_name" />
+								</div>
+								<button style="margin-top: 15px;" onclick="delete_member()" type="button">
+									삭제하기
+								</button>
+					
+				</div>
 			</div>
 		</div>
-	</div>
-	​
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<section>
-				<h2 style= "margin-left: 20px">보내실 말씀</h2>
-				<div class="mypost">
-					<div class="form-floating" style= "margin-left: 20px" style="margin-bottom: 3em">
-						<label for="floatingInput">이름</label>
-						<input style= "margin-bottom: 20px" type="text" class="form-control" id="name" />
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>보내실 말씀</h2>
+					<div class="mypost">
+						<div class="form-floating" style="margin-bottom: 3em">
+							<label for="floatingInput">이름</label>
+							<input type="text" class="form-control" id="name" />
+						</div>
+						<div class="form-floating"  style="margin-bottom: 2em">
+							<label for="floatingTextarea2">응원댓글</label>
+							<input  type="text" class="form-control" id="comment"/>
+						</div>
+						<button onclick="save_comment()" type="button">
+							방명록 남기기
+						</button>
 					</div>
-					<div class="form-floating" style= "margin-left: 20px" style="margin-bottom: 2em">
-						<label for="floatingTextarea2">응원댓글</label>
-						<input style= "margin-bottom: 20px" type="text" class="form-control" id="comment" />
-					</div>
-					<button style= "margin-left: 20px" onclick="save_comment()" type="button" class="btn btn-dark">
-						방명록 남기기
-					</button>
-				</div>
-			</section>
-			<ul class="copyright">
-				<li>&copy; Untitled. All rights reserved</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
 	</div>
 
 	<!-- Scripts -->

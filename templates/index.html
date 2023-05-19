@@ -20,6 +20,8 @@
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 
+	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+	
 	<script>
 		function save_comment() {
 			let formData = new FormData();
@@ -34,6 +36,7 @@
 
 				alert(data["msg"]);
 				window.location.reload();
+				onload(location.href="/comment");
 			});
 		}
 
@@ -45,7 +48,7 @@
         fetch('/members').then(res => res.json()).then(data => {
           
                let rows = data['result']
-                $('#tiles').empty()
+                
                rows.forEach ((a) =>{
 
                 let id = a['id']
@@ -63,7 +66,6 @@
 												<p></p>
 											</div>
 										</a>
-									</article>
 								`
                 $('#tiles').append(temp_html)
                 })			
@@ -124,12 +126,12 @@
 				<section id ="tiles" class="tiles">
 					<article class="style1">
 						<span class="image">
-							<img src="static/images/lim.jpg" alt="" />
+							<img src="static/images/pic01.jpg" alt="" />
 						</span>
-						<a href="member-1">
-							<h2>임호중</h2>
+						<a href="/create">
+							<h2>Create</h2>
 							<div class="content">
-								<p>소개합니다</p>
+								<p></p>
 							</div>
 						</a>
 					</article>
@@ -152,7 +154,7 @@
 							<label for="floatingTextarea2">응원댓글</label>
 							<input type="text" class="form-control" id="comment" />
 						</div>
-						<button onclick="save_comment()" type="button" class="btn btn-dark">
+						<button onclick="save_comment()" type="button">
 							방명록 남기기
 						</button>
 					</div>

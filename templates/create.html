@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>코드 비행사 소개 페이지</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="static/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="static/css/noscript.css" />
+	</noscript>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+	<script>
+		function save_comment() {
+			let formData = new FormData();
+
+			let id = $('#id').val()
+			let name = $('#name').val()
+			let img_index = $('#img_index').val()
+			let img_1 = $('#img_1').val()
+			let img_2 = $('#img_2').val()
+			let img_3 = $('#img_3').val()
+			let man = $('#man').val()
+			let birth = $('#birth').val()
+			let position = $('#position').val()
+			let fav_1 = $('#fav_1').val()
+			let fav_2 = $('#fav_2').val()
+			let fav_3 = $('#fav_3').val()
+			let fav_4 = $('#fav_4').val()
+			let fav_5 = $('#fav_5').val()
+			let nav_1 = $('#nav_1').val()
+			let nav_2 = $('#nav_2').val()
+			let nav_3 = $('#nav_3').val()
+			let nav_4 = $('#nav_4').val()
+			let nav_5 = $('#nav_5').val()
+			let tmi_1 = $('#tmi_1').val()
+			let tmi_2 = $('#tmi_2').val()
+			let tmi_3 = $('#tmi_3').val()
+			let tmi_4 = $('#tmi_4').val()
+			let tmi_5 = $('#tmi_5').val()
+			let music = $('#music').val()
+			let music_url = $('#music_url').val()
+
+			formData.append("id_give", id);
+			formData.append("name_give", name);
+			formData.append("img_index_give", img_index);
+			formData.append("img_1_give", img_1);
+			formData.append("img_2_give", img_2);
+			formData.append("img_3_give", img_3);
+			formData.append("man_give", man);
+			formData.append("birth_give", birth);
+			formData.append("position_give", position);
+			formData.append("fav_1_give", fav_1);
+			formData.append("fav_2_give", fav_2);
+			formData.append("fav_3_give", fav_3);
+			formData.append("fav_4_give", fav_4);
+			formData.append("fav_5_give", fav_5);
+			formData.append("nav_1_give", nav_1);
+			formData.append("nav_2_give", nav_2);
+			formData.append("nav_3_give", nav_3);
+			formData.append("nav_4_give", nav_4);
+			formData.append("nav_5_give", nav_5);
+			formData.append("tmi_1_give", tmi_1);
+			formData.append("tmi_2_give", tmi_2);
+			formData.append("tmi_3_give", tmi_3);
+			formData.append("tmi_4_give", tmi_4);
+			formData.append("tmi_5_give", tmi_5);
+			formData.append("music_give", music);
+			formData.append("music_url_give", music_url);
+
+			fetch('/create', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+
+				alert(data["msg"]);
+				window.location.reload();
+				onload(location.href="/main");
+			});
+		}
+	</script>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="main" class="logo">
+					<span class="symbol"><img src="static/images/logo.png" alt="" /></span><span class="title">Code
+						Pilot</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Member</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+		
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Member</h2>
+			<ul>
+				<li><a href="main">Home</a></li>
+				{% for member in members %}
+				<li><a href="main/member/{{member.id}}">{{member.name}}</a></li>
+				{% endfor %}
+				<li><a href="comment">방명록</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<header>
+					<h1>WE ARE CODE PILOTS!<br />
+						코드 비행사 멤버들을 소개합니다</h1>
+					<p>목적지를 향해 고난과 역경을 이겨내고 팀원들과 힘을 합쳐 비행 하는 중입니다.</p>
+				</header>
+				<form action = "/create">
+					<div class="inner">
+						<section>
+							<h2>정보를 입력해주세요</h2>
+								<div class="mypost">
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">ID</label>
+										<input type="text" class="form-control" id="id" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">이름</label>
+										<input type="text" class="form-control" id="name" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">사진-메인페이지</label>
+										<input type="text" class="form-control" id="img_index" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">사진1-소개페이지</label>
+										<input type="text" class="form-control" id="img_1" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">사진2-소개페이지</label>
+										<input type="text" class="form-control" id="img_2" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 3em">
+										<label for="floatingInput">사진3-소개페이지</label>
+										<input type="text" class="form-control" id="img_3" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">성별</label>
+										<input type="text" class="form-control" id="man" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">생년월일</label>
+										<input type="text" class="form-control" id="birth" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">포지션</label>
+										<input type="text" class="form-control" id="position" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 것-1</label>
+										<input type="text" class="form-control" id="fav_1" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 것-2</label>
+										<input type="text" class="form-control" id="fav_2" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 것-3</label>
+										<input type="text" class="form-control" id="fav_3" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 것-4</label>
+										<input type="text" class="form-control" id="fav_4" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 것-5</label>
+										<input type="text" class="form-control" id="fav_5" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">싫어하는 것-1</label>
+										<input type="text" class="form-control" id="nav_1" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">싫어하는 것-2</label>
+										<input type="text" class="form-control" id="nav_2"  />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">싫어하는 것-3</label>
+										<input type="text" class="form-control" id="nav_3"  />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">싫어하는 것-4</label>
+										<input type="text" class="form-control" id="nav_4"  />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">싫어하는 것-5</label>
+										<input type="text" class="form-control" id="nav_5"  />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">TMI-1</label>
+										<input type="text" class="form-control" id="tmi_1" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">TMI-2</label>
+										<input type="text" class="form-control" id="tmi_2" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">TMI-3</label>
+										<input type="text" class="form-control" id="tmi_3" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">TMI-4</label>
+										<input type="text" class="form-control" id="tmi_4" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">TMI-5</label>
+										<input type="text" class="form-control" id="tmi_5" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">좋아하는 음악 (가수,제목) </label>
+										<input type="text" class="form-control" id="music" />
+									</div>
+									<div class="form-floating" style="margin-bottom: 2em">
+										<label for="floatingTextarea2">Youtude iframe</label>
+										<input type="text" class="form-control" id="music_url" />
+									</div>
+									<button onclick="save_comment()" type="button">
+										Create
+									</button>
+								</div>
+						</section>
+					</div>		
+				</form>
+			</div>
+		</div>
+
+	<!-- Scripts -->
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/browser.min.js"></script>
+	<script src="static/js/breakpoints.min.js"></script>
+	<script src="static/js/util.js"></script>
+	<script src="static/js/main.js"></script>
+</body>
+
+</html>
